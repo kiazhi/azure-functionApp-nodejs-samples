@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AzureApplicationId": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "AzureSecret": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "AzureTenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "AzureSubscription": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "AzureRegion": "southeastasia"
+  }
+}
