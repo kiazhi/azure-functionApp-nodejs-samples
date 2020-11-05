@@ -9,7 +9,7 @@ const azureRegion       = process.env["AzureRegion"] ;
 
 module.exports = async function (context, req) {
 
-    const credentials = await msRestAzure.loginWithServicePrincipalSecret(
+    const credential = await msRestAzure.loginWithServicePrincipalSecret(
         azureAppId,
         azureSecret,
         azureTenant
@@ -18,7 +18,7 @@ module.exports = async function (context, req) {
     var arrayRegulatoryComplianceStandards = []  ;
 
     await new security.SecurityCenter(
-        credentials,
+        credential,
         azureSubscription,
         azureRegion
     ).regulatoryComplianceStandards.list().then(
@@ -36,7 +36,7 @@ module.exports = async function (context, req) {
     await Promise.all(arrayRegulatoryComplianceStandards.map(async (regulatoryComplianceStandard) => {
 
         const regulatoryComplianceStandardControlsList = await new security.SecurityCenter(
-            credentials,
+            credential,
             azureSubscription,
             azureRegion
         ).regulatoryComplianceControls.list(regulatoryComplianceStandard) ;
@@ -45,6 +45,6 @@ module.exports = async function (context, req) {
 
     })) ;
 
-    context.res.json(arrayRegulatoryComplianceStandardsControlsList); ;
+    context.res.json(arrayRegulatoryComplianceStandardsControlsList) ;
 
-}
+} ;

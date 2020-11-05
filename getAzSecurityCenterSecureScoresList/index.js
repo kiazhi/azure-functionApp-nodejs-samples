@@ -9,18 +9,18 @@ const azureRegion       = process.env["AzureRegion"] ;
 
 module.exports = async function (context, req) {
 
-    const credentials = await msRestAzure.loginWithServicePrincipalSecret(
+    const credential = await msRestAzure.loginWithServicePrincipalSecret(
         azureAppId,
         azureSecret,
         azureTenant
     ) ;
 
     const secureScoresList = await new security.SecurityCenter(
-        credentials,
+        credential,
         azureSubscription,
         azureRegion
       ).secureScores.list() ;
     
     context.res.json(secureScoresList) ;
 
-}
+} ;

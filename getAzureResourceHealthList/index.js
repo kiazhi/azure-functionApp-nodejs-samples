@@ -1,5 +1,5 @@
 const msRestAzure = require('@azure/ms-rest-nodeauth');
-const security = require('@azure/arm-security');
+const resourceHealth = require('@azure/arm-resourcehealth');
 
 const azureAppId        = process.env["AzureApplicationId"] ;
 const azureSecret       = process.env["AzureSecret"] ;
@@ -15,12 +15,11 @@ module.exports = async function (context, req) {
         azureTenant
     ) ;
 
-    const regulatoryComplianceStandardsList = await new security.SecurityCenter(
+    const resourceHealthList = await new resourceHealth.MicrosoftResourceHealth(
         credential,
-        azureSubscription,
-        azureRegion
-    ).regulatoryComplianceStandards.list() ;
+        azureSubscription
+    ).availabilityStatuses.listBySubscriptionId() ;
 
-    context.res.json(regulatoryComplianceStandardsList) ;
-
+    context.res.json(resourceHealthList) ;
+    
 } ;

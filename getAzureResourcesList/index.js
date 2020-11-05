@@ -1,5 +1,5 @@
 const msRestAzure = require('@azure/ms-rest-nodeauth');
-const security = require('@azure/arm-security');
+const azResources = require('@azure/arm-resources');
 
 const azureAppId        = process.env["AzureApplicationId"] ;
 const azureSecret       = process.env["AzureSecret"] ;
@@ -15,12 +15,13 @@ module.exports = async function (context, req) {
         azureTenant
     ) ;
 
-    const regulatoryComplianceStandardsList = await new security.SecurityCenter(
+    const client = await new azResources.ResourceManagementClientContext(
         credential,
-        azureSubscription,
-        azureRegion
-    ).regulatoryComplianceStandards.list() ;
+        azureSubscription
+    ) ;
 
-    context.res.json(regulatoryComplianceStandardsList) ;
+    const resourcesByResourceGroupList = await new azResources.Resources(client).list() ;
+
+    context.res.json(resourcesByResourceGroupList) ;
 
 } ;

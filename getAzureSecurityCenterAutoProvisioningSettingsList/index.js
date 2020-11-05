@@ -15,12 +15,12 @@ module.exports = async function (context, req) {
         azureTenant
     ) ;
 
-    const regulatoryComplianceStandardsList = await new security.SecurityCenter(
+    const securityCenterAutoProvisioningSettingsList = await new security.SecurityCenter(
         credential,
         azureSubscription,
         azureRegion
-    ).regulatoryComplianceStandards.list() ;
+      ).autoProvisioningSettings.list() ;
 
-    context.res.json(regulatoryComplianceStandardsList) ;
+    context.res.json(securityCenterAutoProvisioningSettingsList) ;
 
 } ;
